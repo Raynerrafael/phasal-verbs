@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phrasal Verbs</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f4f5f7;
+      color: #1a1a2e;
+      min-height: 100vh;
+      padding: 2rem 1rem 3rem;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #185FA5 0%, #534AB7 100%);
+      padding: 3rem 1.5rem 2.5rem;
+      text-align: center;
+      border-radius: 16px;
+      margin-bottom: 2rem;
+    }
+
+    .badge-hero {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.18);
+      color: #E6F1FB;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+      letter-spacing: 0.6px;
+    }
+
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #E6F1FB;
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.5px;
+    }
+
+    .hero p {
+      font-size: 1rem;
+      color: #B5D4F4;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* O QUE SÃO */
+    .what-is {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid #378ADD;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .what-is h2 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+    }
+
+    .what-is p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.75;
+    }
+
+    .what-is strong { color: #185FA5; }
+    .what-is em { color: #534AB7; font-style: italic; }
+
+    /* STATUS BAR */
+    .status-bar {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 42px;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #ccc;
+      flex-shrink: 0;
+      transition: background 0.3s;
+    }
+
+    .status-dot.active {
+      background: #1D9E75;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.4; }
+    }
+
+    /* SECTION TITLE */
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    /* CARDS GRID */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 14px;
+      margin-bottom: 2rem;
+    }
+
+    /* CARD */
+    .card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1rem 1.1rem 0.9rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      border-color: #b5d4f4;
+      box-shadow: 0 2px 10px rgba(24, 95, 165, 0.08);
+    }
+
+    .card-num {
+      font-size: 11px;
+      color: #aaa;
+      margin-bottom: 6px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .card-en {
+      font-size: 15px;
+      color: #1a1a2e;
+      line-height: 1.55;
+      margin-bottom: 8px;
+    }
+
+    .pv {
+      background: #dbeafe;
+      color: #1e40af;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    .card-pt {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 10px;
+      padding-left: 10px;
+      border-left: 2px solid #e2e8f0;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pv-badge {
+      background: #ede9fe;
+      color: #5b21b6;
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 5px;
+      font-weight: 600;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* BOTÃO OUVIR */
+    .btn-listen {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: transparent;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 5px 11px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #555;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+
+    .btn-listen:hover {
+      background: #f1f5f9;
+      color: #1a1a2e;
+      border-color: #94a3b8;
+    }
+
+    .btn-listen.playing {
+      background: #dbeafe;
+      color: #1e40af;
+      border-color: #93c5fd;
+    }
+
+    .btn-listen svg {
+      width: 13px;
+      height: 13px;
+      flex-shrink: 0;
+    }
+
+    /* FOOTER */
+    .footer-note {
+      text-align: center;
+      font-size: 12px;
+      color: #aaa;
+      padding-top: 0.5rem;
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.8rem; }
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="hero">
+      <span class="badge-hero">Inglês Interativo</span>
+      <h1>Phrasal Verbs</h1>
+      <p>Aprenda os verbos frasais mais usados no inglês com frases reais, traduções e pronúncia em dois idiomas.</p>
+    </div>
+
+    <div class="what-is">
+      <h2>O que são Phrasal Verbs?</h2>
+      <p>Phrasal verbs são combinações de um verbo com uma preposição ou advérbio (ou ambos) que juntos criam um novo significado, diferente do verbo original. Por exemplo, <strong>give up</strong> não significa "dar acima", mas sim <em>desistir</em>. Eles são extremamente comuns no inglês cotidiano e essenciais para soar natural.</p>
+    </div>
+
+    <div class="status-bar" id="status-bar">
+      <div class="status-dot" id="status-dot"></div>
+      <span id="status-text">Clique em "Ouvir frase" para escutar a frase em inglês e depois em português.</span>
+    </div>
+
+    <div class="section-title">15 Frases com Phrasal Verbs</div>
+    <div class="cards-grid" id="cards"></div>
+
+    <p class="footer-note">Phrasal Verbs em destaque azul · Tradução em cinza · Áudio em inglês e depois em português</p>
+
+  </div>
+
+  <script>
+    const data = [
+      {
+        en: 'You should <span class="pv">give up</span> smoking before it\'s too late.',
+        enPlain: "You should give up smoking before it's too late.",
+        pt: "Você deveria desistir de fumar antes que seja tarde demais.",
+        pv: "give up", pvMeaning: "desistir de"
+      },
+      {
+        en: 'Please <span class="pv">turn off</span> the lights when you leave the room.',
+        enPlain: "Please turn off the lights when you leave the room.",
+        pt: "Por favor, apague as luzes quando sair do quarto.",
+        pv: "turn off", pvMeaning: "apagar / desligar"
+      },
+      {
+        en: 'I need to <span class="pv">look into</span> this problem more carefully.',
+        enPlain: "I need to look into this problem more carefully.",
+        pt: "Preciso investigar esse problema com mais cuidado.",
+        pv: "look into", pvMeaning: "investigar"
+      },
+      {
+        en: 'She <span class="pv">ran into</span> her old friend at the supermarket.',
+        enPlain: "She ran into her old friend at the supermarket.",
+        pt: "Ela encontrou por acaso sua antiga amiga no supermercado.",
+        pv: "ran into", pvMeaning: "encontrar por acaso"
+      },
+      {
+        en: 'The meeting was <span class="pv">called off</span> due to the storm.',
+        enPlain: "The meeting was called off due to the storm.",
+        pt: "A reunião foi cancelada por causa da tempestade.",
+        pv: "called off", pvMeaning: "cancelar"
+      },
+      {
+        en: 'Can you <span class="pv">pick up</span> the kids from school today?',
+        enPlain: "Can you pick up the kids from school today?",
+        pt: "Você pode buscar as crianças na escola hoje?",
+        pv: "pick up", pvMeaning: "buscar / pegar"
+      },
+      {
+        en: 'He decided to <span class="pv">take on</span> more responsibilities at work.',
+        enPlain: "He decided to take on more responsibilities at work.",
+        pt: "Ele decidiu assumir mais responsabilidades no trabalho.",
+        pv: "take on", pvMeaning: "assumir"
+      },
+      {
+        en: 'I couldn\'t <span class="pv">figure out</span> how to solve that math problem.',
+        enPlain: "I couldn't figure out how to solve that math problem.",
+        pt: "Eu não consegui descobrir como resolver aquele problema de matemática.",
+        pv: "figure out", pvMeaning: "descobrir / entender"
+      },
+      {
+        en: 'The company will <span class="pv">lay off</span> fifty employees next month.',
+        enPlain: "The company will lay off fifty employees next month.",
+        pt: "A empresa vai demitir cinquenta funcionários no próximo mês.",
+        pv: "lay off", pvMeaning: "demitir"
+      },
+      {
+        en: 'We need to <span class="pv">come up with</span> a new plan quickly.',
+        enPlain: "We need to come up with a new plan quickly.",
+        pt: "Precisamos elaborar um novo plano rapidamente.",
+        pv: "come up with", pvMeaning: "elaborar / criar"
+      },
+      {
+        en: 'Don\'t <span class="pv">put off</span> your homework until the last minute.',
+        enPlain: "Don't put off your homework until the last minute.",
+        pt: "Não adie sua lição de casa até o último minuto.",
+        pv: "put off", pvMeaning: "adiar"
+      },
+      {
+        en: 'She had to <span class="pv">deal with</span> a very difficult situation.',
+        enPlain: "She had to deal with a very difficult situation.",
+        pt: "Ela teve que lidar com uma situação muito difícil.",
+        pv: "deal with", pvMeaning: "lidar com"
+      },
+      {
+        en: 'I will <span class="pv">get back to</span> you as soon as possible.',
+        enPlain: "I will get back to you as soon as possible.",
+        pt: "Vou retornar o seu contato o mais rápido possível.",
+        pv: "get back to", pvMeaning: "retornar / responder"
+      },
+      {
+        en: 'He <span class="pv">showed up</span> late to every single meeting.',
+        enPlain: "He showed up late to every single meeting.",
+        pt: "Ele apareceu atrasado em todas as reuniões.",
+        pv: "showed up", pvMeaning: "aparecer / chegar"
+      },
+      {
+        en: 'The kids <span class="pv">grew up</span> in a small town near the coast.',
+        enPlain: "The kids grew up in a small town near the coast.",
+        pt: "As crianças cresceram em uma pequena cidade perto da costa.",
+        pv: "grew up", pvMeaning: "crescer"
+      }
+    ];
+
+    const iconPlay  = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>`;
+    const iconPause = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`;
+
+    let speaking = false;
+    let currentBtn = null;
+
+    function buildCards() {
+      const container = document.getElementById('cards');
+      data.forEach((item, i) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="card-num">#${String(i + 1).padStart(2, '0')}</div>
+          <div class="card-en">${item.en}</div>
+          <div class="card-pt">${item.pt}</div>
+          <div class="card-footer">
+            <span class="pv-badge">${item.pv} = ${item.pvMeaning}</span>
+            <button class="btn-listen" data-index="${i}">${iconPlay} Ouvir frase</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      document.querySelectorAll('.btn-listen').forEach(btn => {
+        btn.addEventListener('click', () => handleSpeak(parseInt(btn.dataset.index), btn));
+      });
+    }
+
+    function setStatus(msg, active) {
+      document.getElementById('status-text').textContent =
+        msg || 'Clique em "Ouvir frase" para escutar a frase em inglês e depois em português.';
+      document.getElementById('status-dot').className = 'status-dot' + (active ? ' active' : '');
+    }
+
+    function resetBtn(btn) {
+      btn.classList.remove('playing');
+      btn.innerHTML = `${iconPlay} Ouvir frase`;
+    }
+
+    function handleSpeak(idx, btn) {
+      if (speaking) {
+        window.speechSynthesis.cancel();
+        if (currentBtn) resetBtn(currentBtn);
+        setStatus('', false);
+        speaking = false;
+        if (currentBtn === btn) { currentBtn = null; return; }
+        currentBtn = null;
+      }
+
+      speaking = true;
+      currentBtn = btn;
+      btn.classList.add('playing');
+      btn.innerHTML = `${iconPause} Parar`;
+
+      const item = data[idx];
+
+      if (window.speechSynthesis.getVoices().length === 0) {
+        window.speechSynthesis.onvoiceschanged = () => sayEnglish(item);
+      } else {
+        sayEnglish(item);
+      }
+    }
+
+    function getVoice(lang) {
+      return window.speechSynthesis.getVoices().find(v => v.lang.startsWith(lang)) || null;
+    }
+
+    function sayEnglish(item) {
+      if (!speaking) return;
+      setStatus('🔊 Lendo em inglês...', true);
+      const utt = new SpeechSynthesisUtterance(item.enPlain);
+      utt.lang = 'en-US';
+      utt.rate = 0.88;
+      const v = getVoice('en');
+      if (v) utt.voice = v;
+      utt.onend = () => { if (speaking) sayPortuguese(item); };
+      utt.onerror = () => { if (speaking) sayPortuguese(item); };
+      window.speechSynthesis.speak(utt);
+    }
+
+    function sayPortuguese(item) {
+      if (!speaking) return;
+      setStatus('🔊 Lendo em português...', true);
+      const utt = new SpeechSynthesisUtterance(item.pt);
+      utt.lang = 'pt-BR';
+      utt.rate = 0.88;
+      const v = getVoice('pt');
+      if (v) utt.voice = v;
+      utt.onend = finish;
+      utt.onerror = finish;
+      window.speechSynthesis.speak(utt);
+    }
+
+    function finish() {
+      speaking = false;
+      if (currentBtn) resetBtn(currentBtn);
+      currentBtn = null;
+      setStatus('', false);
+    }
+
+    buildCards();
+  </script>
+
+</body>
+</html>
